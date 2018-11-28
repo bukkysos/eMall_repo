@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/eMall', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/eMall', { useNewUrlParser: true});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -33,5 +33,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use('/users', usersRouter);
 
 module.exports = app;
