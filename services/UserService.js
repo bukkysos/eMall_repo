@@ -11,5 +11,12 @@ exports.getAllUsers = function(req, res){
     repository.getAll({},'-password -__v', function(err, data){
         if (err) res.json({err:err, message:'sorry, an error occured while retrieving records'});
         res.json(data);
-    })
+    });
+}
+
+exports.updateUser = function(req, res){
+    repository.update(id, options, function(err){
+        if (err) res.json({err:err, message:'error, user cannot be updated'});
+        res.json({message:'user updated successfully'});
+    });
 }
