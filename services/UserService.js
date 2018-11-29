@@ -6,3 +6,10 @@ exports.addUser = function(req, res, data){
         res.json({message:'user created successfully'});
     });
 }
+
+exports.getAllUsers = function(req, res){
+    repository.getAll({},'-password -__v', function(err, data){
+        if (err) res.json({err:err, message:'sorry, an error occured while retrieving records'});
+        res.json(data);
+    })
+}
