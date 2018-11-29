@@ -22,3 +22,12 @@ exports.deleteUser = function(req, res){
 exports.getUserByParam = function(req, res){
     var options = req.query
 }
+
+exports.getUsers = function(req, res){
+    try {
+        return service.getAllUsers(req, res);
+    } 
+    catch(exception){
+        console.log("Error: "+ exception);
+    }
+}
