@@ -11,6 +11,10 @@ BaseRepository.prototype.getAll = function(options, columns, callback){
     this.model.find(options, columns, callback);
 }
 
+BaseRepository.prototype.update = function(id, options, callback){
+    this.model.findByIdAndUpdate(id, options, callback);
+    
+}
 module.exports = function(model){
     return new BaseRepository(model);
 }
