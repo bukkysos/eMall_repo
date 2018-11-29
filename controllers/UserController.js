@@ -12,7 +12,13 @@ exports.addUser = function(req, res){
 
 exports.updateUser = function(req, res){
     var id = req.params.id;
-    var options = req.body
+    var options = req.body;
+    try {
+        return service.updateUser(req, res, id, options)
+    }
+    catch(exception){
+        console.log("Error: " +exception);
+    }
 };
 
 exports.deleteUser = function(req, res){
@@ -22,6 +28,7 @@ exports.deleteUser = function(req, res){
 exports.getUserByParam = function(req, res){
     var options = req.query
 }
+
 
 exports.getUsers = function(req, res){
     try {
