@@ -14,9 +14,16 @@ exports.getAllUsers = function(req, res){
     });
 }
 
-exports.updateUser = function(req, res){
+exports.updateUser = function(req, res, id, options){
     repository.update(id, options, function(err){
         if (err) res.json({err:err, message:'error, user cannot be updated'});
         res.json({message:'user updated successfully'});
+    });
+}
+
+exports.deleteUser = function(req, res, data){
+    repository.delete(data, function(err){
+        if (err) re.json({err:err, message:'sorry, user cannot be deleted'});
+        res.json({message:'user deleted successfully'});
     });
 }
