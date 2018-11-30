@@ -13,8 +13,12 @@ BaseRepository.prototype.getAll = function(options, columns, callback){
 
 BaseRepository.prototype.update = function(id, options, callback){
     this.model.findByIdAndUpdate(id, options, callback);
-    
 }
+
+BaseRepository.prototype.delete = function(data, callback){
+    this.model.remove(data, callback);
+}
+
 module.exports = function(model){
     return new BaseRepository(model);
 }
