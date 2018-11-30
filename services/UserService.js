@@ -23,7 +23,14 @@ exports.updateUser = function(req, res, id, options){
 
 exports.deleteUser = function(req, res, data){
     repository.delete(data, function(err){
-        if (err) re.json({err:err, message:'sorry, user cannot be deleted'});
+        if (err) res.json({err:err, message:'sorry, user cannot be deleted'});
         res.json({message:'user deleted successfully'});
     });
+}
+
+exports.getUsersByParam = function(req, res, options){
+    repository.getAll(options, function(err, users){
+        if (err) res.json({err:err, message: 'error, could not retrieve user record'});
+        res.json(users);
+    })
 }
