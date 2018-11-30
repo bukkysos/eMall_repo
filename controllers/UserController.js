@@ -33,6 +33,12 @@ exports.deleteUser = function(req, res){
 
 exports.getUserByParam = function(req, res){
     var options = req.query
+    try {
+        return service.getUsersByParam(req, res, options);
+    }
+    catch(exception){
+        console.log("Error: "+exception)
+    }
 }
 
 
