@@ -22,7 +22,13 @@ exports.updateUser = function(req, res){
 };
 
 exports.deleteUser = function(req, res){
-    var data = {_id:req.params.id}
+    var data = {_id:req.params.id};
+    try {
+        return service.deleteUser(req, res, data);
+    }
+    catch(exception){
+        console.log("Error: +exception");
+    }
 }
 
 exports.getUserByParam = function(req, res){
