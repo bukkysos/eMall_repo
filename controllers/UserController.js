@@ -5,6 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const passwordHash = require('password-hash');
+const secret = require('../config/secret');
 
 const schema = Joi.object().keys({
     username: Joi.string().min(3).max(30).required(),
