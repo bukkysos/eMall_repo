@@ -4,9 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var session = require('express-session');
+var passport = require('passport');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -23,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/eMall', { useNewUrlParser: true});
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -35,5 +42,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.use('/users', usersRouter);
+app.use('/login', loginRouter)
 
 module.exports = app;
