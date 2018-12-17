@@ -12,7 +12,7 @@ BaseRepository.prototype.getAll = function(options, columns, callback){
 }
 
 BaseRepository.prototype.update = function(id, options, callback){
-    this.model.findByIdAndUpdate(id, options, callback);
+    this.model.findOneAndUpdate(id, options, callback);
 }
 
 BaseRepository.prototype.delete = function(data, callback){
