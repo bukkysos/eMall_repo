@@ -85,19 +85,17 @@ exports.loginUser = function(req, res){
 
 
 
-exports.updateUser = function(req, res){
-    var id = req.params.id;
+ exports.updateUser = function(req, res){
+    var id = req.params.id
     var options = req.body;
-    Joi.validate({username: options.username, email: options.email, password: options.password}, function(err){
-        if (err) { 
-            res.json({err:err.message});
-        }
-        else {
+    Joi.validate({username:options.username, email:options.email, password:options.password}, schema, function(err){
+        if (err) {
+            return res.json({err:err.message});
+        } else {
             try {
-                return service.updateUser(req, res, id, options);
-            }
-            catch(exception) {
-                console.log("Error: " +exception);
+                 return service.updateUser(req, res, id, options);
+            } catch(exception){
+                console.log("Error: "+exception);
             }
         }
     });
@@ -132,3 +130,4 @@ exports.getUsers = function(req, res){
         console.log("Error: "+ exception);
     }
 }
+
