@@ -7,6 +7,10 @@ exports.addUser = function(req, res, data){
     });
 }
 
+
+
+
+
 exports.getAllUsers = function(req, res){
     repository.getAll({}, function(err, data){
         if (err) res.json({err:err, message:'sorry, an error occured while retrieving records'});
