@@ -6,6 +6,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const passwordHash = require('password-hash');
 const secret = require('../config/secret');
+var cloud = require('../services/CloudinaryService')
 
 const schema = Joi.object().keys({
     username: Joi.string().min(3).max(30).required(),
@@ -17,7 +18,7 @@ exports.addUser = function(req, res){
     var data = {
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
     };
 Joi.validate({username:data.username, email:data.email, password:data.password}, schema, function (err) {
         if (err) {
@@ -80,7 +81,32 @@ exports.loginUser = function(req, res){
      } catch(exception){
         console.log(exception);
     }
- }
+}
+
+exports.userProfile = function(req, res){
+     const id = {_id: req.params.id};
+     const options =  {
+        item : req.body.item,
+        image : req.file,
+        imageID : '',
+        description : req.body.description,
+        title : req.body.title,
+        quantity : req.body.quantity
+    }
+    try {
+        cloud.uploadToCloud(options.image).then((result)=> {
+            options.image = result.url;
+            options.imageID = result.ID;
+            console.log(options.image);
+        console.log(options.imageID)
+        });
+        
+        return service.updateUser(req, res, id, options);
+    }
+    catch(exception){
+        console.log("Error :"+exception);
+    }
+    }
  
 
 
